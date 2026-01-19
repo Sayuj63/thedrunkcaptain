@@ -1,12 +1,26 @@
 'use client';
 
+import { useMemo } from 'react';
+
 interface BeerGlassProps {
   fillPercentage: number;
   className?: string;
 }
 
 export default function BeerGlass({ fillPercentage, className = '' }: BeerGlassProps) {
-  const fillHeight = (fillPercentage / 100) * 400;
+  const fillHeight = useMemo(() => (fillPercentage / 100) * 400, [fillPercentage]);
+
+  const foamBubbles = useMemo(
+    () =>
+      Array.from({ length: 8 }, (_, i) => {
+        const offset = (i - 3.5) * 16;
+        const yOffset = Math.abs(offset) * 0.25;
+        const r = 5 + ((i * 7) % 4);
+        const opacity = 0.85 - Math.abs(offset) * 0.01;
+        return { id: i, offset, yOffset, r, opacity };
+      }),
+    []
+  );
 
   return (
     <svg
@@ -92,20 +106,16 @@ export default function BeerGlass({ fillPercentage, className = '' }: BeerGlassP
           />
           
           {/* Foam bubbles */}
-          {[...Array(8)].map((_, i) => {
-            const offset = (i - 4) * 15;
-            const yOffset = Math.abs(offset) * 0.3;
-            return (
-              <circle
-                key={i}
-                cx={150 + offset}
-                cy={450 - fillHeight - 10 + yOffset}
-                r={5 + Math.random() * 3}
-                fill="url(#foamGradient)"
-                opacity={0.8 - Math.abs(offset) * 0.01}
-              />
-            );
-          })}
+          {foamBubbles.map((bubble) => (
+            <circle
+              key={bubble.id}
+              cx={150 + bubble.offset}
+              cy={450 - fillHeight - 10 + bubble.yOffset}
+              r={bubble.r}
+              fill="url(#foamGradient)"
+              opacity={bubble.opacity}
+            />
+          ))}
         </g>
       )}
 
