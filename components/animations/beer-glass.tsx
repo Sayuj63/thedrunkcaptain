@@ -95,12 +95,13 @@ export default function BeerGlass({ fillPercentage, className = '' }: BeerGlassP
           {[...Array(8)].map((_, i) => {
             const offset = (i - 4) * 15;
             const yOffset = Math.abs(offset) * 0.3;
+            const bubbleRadius = 5 + ((i * 7) % 10) * 0.3;
             return (
               <circle
                 key={i}
                 cx={150 + offset}
                 cy={450 - fillHeight - 10 + yOffset}
-                r={5 + Math.random() * 3}
+                r={bubbleRadius}
                 fill="url(#foamGradient)"
                 opacity={0.8 - Math.abs(offset) * 0.01}
               />

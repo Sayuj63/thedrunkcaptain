@@ -13,7 +13,7 @@ export default function HeroContent() {
           THE DRUNK CAPTAIN
         </h1>
         <p className="text-xl md:text-2xl text-[#d4af37]/80 mb-8 animate-fade-in-delay">
-          A pirate's odyssey through the digital seas
+          A pirate&apos;s odyssey through the digital seas
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
           <div className="px-8 py-4 bg-[#d4af37]/10 border-2 border-[#d4af37] rounded-lg hover:bg-[#d4af37]/20 transition-all cursor-pointer backdrop-blur-sm">
