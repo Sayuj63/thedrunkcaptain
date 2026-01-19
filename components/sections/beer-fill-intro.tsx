@@ -13,7 +13,6 @@ interface BeerFillIntroProps {
 export default function BeerFillIntro({ onComplete }: BeerFillIntroProps) {
   const [fillPercentage, setFillPercentage] = useState(0);
   const [isSkipped, setIsSkipped] = useState(false);
-  const [showContent, setShowContent] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const glassRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -22,7 +21,6 @@ export default function BeerFillIntro({ onComplete }: BeerFillIntroProps) {
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-        setShowContent(true);
         onComplete?.();
       },
     });
@@ -96,7 +94,6 @@ export default function BeerFillIntro({ onComplete }: BeerFillIntroProps) {
         if (containerRef.current) {
           containerRef.current.style.pointerEvents = 'none';
         }
-        setShowContent(true);
         onComplete?.();
       },
     });
